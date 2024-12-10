@@ -1,4 +1,4 @@
-const handler = require('../src/rewriter');
+const handler = require('./rewriter');
 
 const buildRequest = (path: string) => {
     return {

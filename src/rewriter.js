@@ -65,7 +65,3 @@ function handler(event) {
     // Pass through the request if no match is found
     return request;
 }
-// ***************************************************
-// Should not be copied to AWS Lambda below this point
-// ***************************************************
-module.exports = handler;

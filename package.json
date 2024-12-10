@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && jasmine"
+    "test": "npm run build && cp src/rewriter.js build/rewriter.js && echo \"\n\nmodule.exports = handler;\" >> build/rewriter.js && jasmine"
   },
   "keywords": [],
   "author": "",
