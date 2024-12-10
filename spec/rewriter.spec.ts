@@ -1,4 +1,3 @@
-let Jasmine = require('jasmine');
 const handler = require('../src/rewriter');
 
 const buildRequest = (path: string) => {
