@@ -19,8 +19,7 @@ const regexPatterns = [
 ];
 
 function handler(event) {
-    const request = event.request;
-    const uri = request.uri;
+    const uri = event.request.uri;
     var targetUri = null;
 
     for (var i = 0; i < regexPatterns.length; i++) {
@@ -48,5 +47,5 @@ function handler(event) {
         };
     }
 
-    return request;
+    return event.request;
 }
