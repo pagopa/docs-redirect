@@ -1,26 +1,22 @@
-// Source: https://github.com/pagopa/docs-redirect/blob/main/src/rewriter.js
+/*****************************************************
+ * Before modifying the code here below, please      *
+ * follow the instructions here:                     *
+ * https://github.com/pagopa/docs-redirect/README.md *
+ *****************************************************/
 const devPortalBaseURL = "https://developer.pagopa.it";
-
-const stripOutBaseUrl = (url) => {
-    return url.replace(/^\//, "");
-}
-
 const versionedRegexHelper = (url) => {
-    const name = stripOutBaseUrl(url);
+    const name = url.replace(/^\//, "");
     return new RegExp("\\/"+name+"(?:\\/"+name+"\\-(?<version>\\d+\\.\\d+\\.\\d+))?(?<path>.*)");
 }
 
-/**************************************************
- * Hardcoded regex patterns and their redirectTos *
- **************************************************/
+/*****************************************************
+ * Rules here below                                  *
+ *****************************************************/
 const regexPatterns = [
     {
         regex: versionedRegexHelper("/saci"), redirectTo: "/pago-pa/guides/saci"
     }
 ];
-/**************************************************
- * End of the hardcoded redirection table         *
- **************************************************/
 
 function handler(event) {
     const request = event.request;
@@ -52,6 +48,5 @@ function handler(event) {
         };
     }
 
-    // Pass through the request if no match is found
     return request;
 }
