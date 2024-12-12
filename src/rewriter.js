@@ -1,36 +1,26 @@
 // Source: https://github.com/pagopa/docs-redirect/blob/main/src/rewriter.js
-
 const devPortalBaseURL = "https://developer.pagopa.it";
 
 const stripOutBaseUrl = (url) => {
     return url.replace(/^\//, "");
 }
 
-// buildVersionedRegex returns a regex capable of matching paths like:
-// /saci
-// /saci/mypath  --> the capturing group 'path' --> "/mypath"
-// /saci/saci-1.2.3 --> the capturing group 'version'--> '1.2.3'
-// /saci/saci-1.2.3/mypath --> the capturing group 'version' -> '1.2.3' and 'path' --> 'mypath'
-const buildVersionedRegex = (url) => {
+const versionedRegexHelper = (url) => {
     const name = stripOutBaseUrl(url);
     return new RegExp("\\/"+name+"(?:\\/"+name+"\\-(?<version>\\d+\\.\\d+\\.\\d+))?(?<path>.*)");
 }
 
-// buildUnvrsionedRegex returns a regex capable of matching paths like:
-// /saci
-// /saci/mypath  --> the capturing group 'path' -> "/mypath"
-const buildUnversionedRegex = (url) => {
-    return new RegExp("\\/"+ stripOutBaseUrl(url) +"(?<path>.*)");
-}
-
-// Hardcoded regex patterns and their redirectTos
+/**************************************************
+ * Hardcoded regex patterns and their redirectTos *
+ **************************************************/
 const regexPatterns = [
     {
-        regex: buildVersionedRegex("/saci"), redirectTo: "/pago-pa/guides/saci"
-    },
-    {   regex: buildUnversionedRegex("/unversioned"), redirectTo: "/destination-unversioned"
+        regex: versionedRegexHelper("/saci"), redirectTo: "/pago-pa/guides/saci"
     }
 ];
+/**************************************************
+ * End of the hardcoded redirection table         *
+ **************************************************/
 
 function handler(event) {
     const request = event.request;
