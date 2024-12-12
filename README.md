@@ -22,6 +22,8 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 1. **Aggiornamento del Codice**:  
    Modifica `src/rewriter.js` per aggiungere la nuova regola di rewrite. La nuova regola va inserita all'interno dell'array `regexPatterns`. 
 
+   > Attenzione: CloudFront Function supporta JavaScript ECMAScript 5.1!
+
 2. **Creazione dei Test**:  
    Aggiungi o aggiorna i test nella cartella `tests/` per verificare la nuova regola.
 
@@ -33,20 +35,22 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
    Assicurati che tutti i test, inclusi quelli per la nuova regola, vengano superati.
 
+   > Attenzione: L'esecuzione dei test include i check di compatibilità con Javascript ECMAScript 5.1 richiesto dalle CloudFront Function!
+
 ## Helper per la scrittura di regex
 Per facilitare la scrittura delle regex di riconoscimento è disponibile l'_helper_ `versionedRegexHelper`. 
 
 Infatti la regex restituita permette di riconoscere ed isolare la versione nei path in cui fosse presente, come ad es. nel caso `/saci/saci-1.2.3`.
-La regex crea infatti i seguenti _named-group_:
+La regex crea infatti i seguenti gruppi:
 
-- version: (opzionale) contiene la stringa di versione nell'URL
-- path: contiene il path
+- 1: (opzionale) contiene la stringa di versione nell'URL
+- 2: contiene il path
 
 La combinazione di queste informazioni è utilizzata nella costruzione dell'URL di redirect.
 
 Ad esempio invocando l'helper `versionedRegexHelper('/saci')` otteniamo una regex che restituirà i seguenti valori:
 
-| URI | named-group: version | named-group: path
+| URI | gruppo 1 | gruppo 2
 | --- | ------- | ----
 | /saci | | 
 | /saci/ | | /

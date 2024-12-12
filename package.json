@@ -5,14 +5,22 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && cp src/rewriter.js build/rewriter.js && echo \"\n\nmodule.exports = handler;\" >> build/rewriter.js && jasmine"
+    "eslint": "npx eslint src/rewriter.js",
+    "copy": "cp src/rewriter.js build/rewriter.js && echo \"\n\nmodule.exports = handler;\" >> build/rewriter.js",
+    "test": "run-s build eslint copy && jasmine"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "@types/jasmine": "^5.1.5",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
     "jasmine": "^5.5.0",
-    "ts-node": "^10.9.2"
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.18.0"
   }
 }

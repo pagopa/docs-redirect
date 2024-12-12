@@ -3,48 +3,56 @@
  * follow the instructions here:                     *
  * https://github.com/pagopa/docs-redirect/README.md *
  *****************************************************/
-const devPortalBaseURL = "https://developer.pagopa.it";
-const versionedRegexHelper = (url) => {
-    const name = url.replace(/^\//, "");
-    return new RegExp("\\/"+name+"(?:\\/"+name+"\\-(?<version>\\d+\\.\\d+\\.\\d+))?(?<path>.*)");
-}
+var devPortalBaseURL = "https://developer.pagopa.it";
+var versionedRegexHelper = function(url) {
+    var name = url.replace(/^\//, "");
+    return new RegExp("\\/" + name + "(?:\\/" + name + "\\-(\\d+\\.\\d+\\.\\d+))?(.*)");
+};
 
 /*****************************************************
  * Rules here below                                  *
  *****************************************************/
-const regexPatterns = [
+var regexPatterns = [
     {
         regex: versionedRegexHelper("/saci"), redirectTo: "/pago-pa/guides/saci"
     }
 ];
 
 function handler(event) {
-    const uri = event.request.uri;
-    var targetUri = null;
-
-    for (var i = 0; i < regexPatterns.length; i++) {
-        const pattern = regexPatterns[i];
-        const match = pattern.regex.exec(uri);
-        if (match) {
-            targetUri = devPortalBaseURL + pattern.redirectTo;
-            if (match.groups?.version != null) {
-                targetUri += "/" + match.groups?.version;
-            }
-            if (match.groups?.path != null) {
-                targetUri += match.groups?.path;
-            }
-            break;
-        }
+    if (!event || !event.request || typeof event.request.uri !== 'string') {
+        return {
+            statusCode: 400,
+            statusDescription: "Bad Request",
+            body: "Invalid URI"
+        };
     }
 
-    if (targetUri) {
-        return {
-            statusCode: 301,
-            statusDescription: "Moved Permanently",
-            headers: {
-                location: { value: targetUri }
+    var uri = event.request.uri;
+
+    for (var i = 0; i < regexPatterns.length; i++) {
+        var pattern = regexPatterns[i];
+        var match = pattern.regex.exec(uri);
+        if (match) {
+            var version = match[1]; 
+            var path = match[2];
+            var targetUri = devPortalBaseURL + pattern.redirectTo;
+
+            if (version) {
+                targetUri += "/" + version;
             }
-        };
+
+            if (path) {
+                targetUri += path;
+            }
+
+            return {
+                statusCode: 301,
+                statusDescription: "Moved Permanently",
+                headers: {
+                    location: { value: targetUri }
+                }
+            };
+        }
     }
 
     return event.request;
