@@ -48,7 +48,7 @@ La regex crea infatti i seguenti gruppi:
 
 La combinazione di queste informazioni è utilizzata nella costruzione dell'URL di redirect.
 
-Ad esempio invocando l'helper `versionedRegexHelper('/saci')` otteniamo una regex che restituirà i seguenti valori:
+Ad esempio invocando l'helper `versionedRegexHelper('saci')` otteniamo una regex che restituirà i seguenti valori:
 
 | URI | gruppo 1 | gruppo 2
 | --- | ------- | ----

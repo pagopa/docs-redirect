@@ -4,17 +4,16 @@
  * https://github.com/pagopa/docs-redirect/README.md *
  *****************************************************/
 var devPortalBaseURL = "https://developer.pagopa.it";
-var versionedRegexHelper = function(url) {
-    var name = url.replace(/^\//, "");
-    return new RegExp("\\/" + name + "(?:\\/" + name + "\\-(\\d+\\.\\d+\\.\\d+))?(.*)");
+
+var versionedRegexHelper = function(name) {
+    var regex = new RegExp("\\/" + name + "(?:\\/" + name + "\\-(\\d+\\.\\d+\\.\\d+))?(.*)");
+    regex._helper = "versionedRegexHelper";
+    return regex;
 };
 
-/*****************************************************
- * Rules here below                                  *
- *****************************************************/
 var regexPatterns = [
     {
-        regex: versionedRegexHelper("/saci"), redirectTo: "/pago-pa/guides/saci"
+        regex: versionedRegexHelper("saci"), redirectTo: "/pago-pa/guides/saci"
     }
 ];
 
@@ -33,8 +32,13 @@ function handler(event) {
         var pattern = regexPatterns[i];
         var match = pattern.regex.exec(uri);
         if (match) {
-            var version = match[1]; 
-            var path = match[2];
+            var version = null, path = null;
+
+            if (pattern.regex._helper == "versionedRegexHelper") {
+                version = match[1];
+                path = match[2];
+            }
+
             var targetUri = devPortalBaseURL + pattern.redirectTo;
 
             if (version) {
