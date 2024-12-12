@@ -42,11 +42,11 @@ La regex crea infatti i seguenti _named-group_:
 - version: (opzionale) contiene la stringa di versione nell'URL
 - path: contiene il path
 
-La combinazione di queste informazioni è utile nella costruizione dell'URL di redirect.
+La combinazione di queste informazioni è utilizzata nella costruzione dell'URL di redirect.
 
 Ad esempio invocando l'helper `versionedRegexHelper('/saci')` otteniamo una regex che restituirà i seguenti valori:
 
-| URL | named-group: version | named-group: path
+| URI | named-group: version | named-group: path
 | --- | ------- | ----
 | /saci | | 
 | /saci/ | | /
@@ -55,4 +55,4 @@ Ad esempio invocando l'helper `versionedRegexHelper('/saci')` otteniamo una rege
 | /saci/saci-1.2.3/mypath | 1.2.3 | mypath
 
 ## Distribuzione
-Una volta verificata la nuova regola, copia il file rewriter.js aggiornato nella Lambda, in modo che l’ambiente di produzione utilizzi la versione testata.
+Una volta verificata la nuova regola, copia il file rewriter.js aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
