@@ -25,28 +25,28 @@ var matchHelper = function(prefix) {
 
 var regexPatterns = [
     {
-        regex: matchHelper("io-guida-tecnica/guida-tecnica-1.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.2"
+        active: false, regex: matchHelper("io-guida-tecnica/guida-tecnica-1.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.2"
     },
     {
-        regex: versionedRegexHelper("io-guida-tecnica"), redirectTo: "/app-io/guides/io-guida-tecnica"
+        active: false, regex: versionedRegexHelper("io-guida-tecnica"), redirectTo: "/app-io/guides/io-guida-tecnica"
     },
     {
-        regex: matchHelper("manuale-servizi/manuale-servizi-v1.0"), redirectTo: "/app-io/guides/manuale-servizi/v1.0"
+        active: false, regex: matchHelper("manuale-servizi/manuale-servizi-v1.0"), redirectTo: "/app-io/guides/manuale-servizi/v1.0"
     },
     {
-        regex: matchHelper("manuale-servizi/v1.1-2"), redirectTo: "/app-io/guides/manuale-servizi/v1.1"
+        active: false, regex: matchHelper("manuale-servizi/v1.1-2"), redirectTo: "/app-io/guides/manuale-servizi/v1.1"
     },
     {
-        regex: versionedRegexHelper("carta-giovani-nazionale"), redirectTo: "/app-io/guides/carta-giovani-nazionale"
+        active: false, regex: versionedRegexHelper("carta-giovani-nazionale"), redirectTo: "/app-io/guides/carta-giovani-nazionale"
     },
     {
-        regex: versionedRegexHelper("manuale-operativo-di-firma-con-io"), redirectTo: "/app-io/guides/manuale-operativo"
+        active: false, regex: versionedRegexHelper("manuale-operativo-di-firma-con-io"), redirectTo: "/app-io/guides/manuale-operativo"
     },
     {
-        regex: versionedRegexHelper("manuale-servizi"), redirectTo: "/app-io/guides/manuale-servizi"
+        active: false, regex: versionedRegexHelper("manuale-servizi"), redirectTo: "/app-io/guides/manuale-servizi"
     },
     {
-        regex: versionedRegexHelper("saci", "saci-"), redirectTo: "/pago-pa/guides/saci"
+        active: false, regex: versionedRegexHelper("saci", "saci-"), redirectTo: "/pago-pa/guides/saci"
     }
 ];
 
@@ -61,7 +61,7 @@ function handler(event) {
 
     var uri = event.request.uri;
 
-    for (var i = 0; i < regexPatterns.length; i++) {
+    for (var i = 0; i < regexPatterns.length && (event.request || regexPatterns[i].active); i++) {
         var pattern = regexPatterns[i];
         var match = pattern.regex.exec(uri);
 

@@ -3,7 +3,8 @@ const handler = require('./rewriter');
 const buildRequest = (path: string) => {
     return {
         request: {
-            uri: path
+            uri: path,
+            _test: true
         } 
     }
 }
@@ -51,8 +52,8 @@ describe('Rewriter', () => {
     });
 
     it('Should not intercept these resources', () => {
-        expect(handler(buildRequest("/not-mapped/"))).toEqual({ uri: "/not-mapped/"})
-        expect(handler(buildRequest("/not-mapped/subpath/1.2.3"))).toEqual({ uri: "/not-mapped/subpath/1.2.3"})
+        expect(handler(buildRequest("/not-mapped/"))).toEqual({ uri: "/not-mapped/", _test: true })
+        expect(handler(buildRequest("/not-mapped/subpath/1.2.3"))).toEqual({ uri: "/not-mapped/subpath/1.2.3",_test: true})
     })
 
 })
