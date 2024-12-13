@@ -5,15 +5,48 @@
  *****************************************************/
 var devPortalBaseURL = "https://developer.pagopa.it";
 
-var versionedRegexHelper = function(name) {
-    var regex = new RegExp("\\/" + name + "(?:\\/" + name + "\\-(\\d+\\.\\d+\\.\\d+))?(.*)");
+var versionedRegexHelper = function(name, versionPrefix) {
+    var stringRegex = "\\/" + name + "(?:\\/";
+    if (versionPrefix) {
+        stringRegex += versionPrefix;
+    }
+    stringRegex += "(v?\\d+(?:\\.\\d+(?:\\.\\d+)?)?))?(.*)";
+    var regex = new RegExp(stringRegex);
     regex._helper = "versionedRegexHelper";
     return regex;
 };
 
+var matchHelper = function(prefix) {
+    var stringRegex = prefix.replaceAll("/", "\\/").replaceAll(".", "\\.") + "(.*)";
+    var regex = new RegExp(stringRegex);
+    regex._helper = "matchHelper";
+    return regex;
+}
+
 var regexPatterns = [
     {
-        regex: versionedRegexHelper("saci"), redirectTo: "/pago-pa/guides/saci"
+        regex: matchHelper("io-guida-tecnica/guida-tecnica-1.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.2"
+    },
+    {
+        regex: versionedRegexHelper("io-guida-tecnica"), redirectTo: "/app-io/guides/io-guida-tecnica"
+    },
+    {
+        regex: matchHelper("manuale-servizi/manuale-servizi-v1.0"), redirectTo: "/app-io/guides/manuale-servizi/v1.0"
+    },
+    {
+        regex: matchHelper("manuale-servizi/v1.1-2"), redirectTo: "/app-io/guides/manuale-servizi/v1.1"
+    },
+    {
+        regex: versionedRegexHelper("carta-giovani-nazionale"), redirectTo: "/app-io/guides/carta-giovani-nazionale"
+    },
+    {
+        regex: versionedRegexHelper("manuale-operativo-di-firma-con-io"), redirectTo: "/app-io/guides/manuale-operativo"
+    },
+    {
+        regex: versionedRegexHelper("manuale-servizi"), redirectTo: "/app-io/guides/manuale-servizi"
+    },
+    {
+        regex: versionedRegexHelper("saci", "saci-"), redirectTo: "/pago-pa/guides/saci"
     }
 ];
 
@@ -31,12 +64,18 @@ function handler(event) {
     for (var i = 0; i < regexPatterns.length; i++) {
         var pattern = regexPatterns[i];
         var match = pattern.regex.exec(uri);
+
         if (match) {
+            
             var version = null, path = null;
 
             if (pattern.regex._helper == "versionedRegexHelper") {
                 version = match[1];
                 path = match[2];
+            }
+
+            if (pattern.regex._helper == "matchHelper") {
+                path = match[1];
             }
 
             var targetUri = devPortalBaseURL + pattern.redirectTo;
