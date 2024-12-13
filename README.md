@@ -40,11 +40,11 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 ## Helper per la scrittura di regex
 Per facilitare la scrittura delle regex di riconoscimento è disponibile l'_helper_ `versionedRegexHelper`. 
 
-Infatti la regex restituita permette di riconoscere ed isolare la versione nei path in cui fosse presente, come ad es. nel caso `/saci/saci-1.2.3`.
+Infatti la regex restituita permette di riconoscere ed isolare la versione nei path in cui è presente, come ad es.`/saci/saci-1.2.3`.
 La regex crea infatti i seguenti gruppi:
 
 - 1: (opzionale) contiene la stringa di versione nell'URL
-- 2: contiene il path
+- 2: (opzionale) contiene il path
 
 La combinazione di queste informazioni è utilizzata nella costruzione dell'URL di redirect.
 
@@ -56,7 +56,7 @@ Ad esempio invocando l'helper `versionedRegexHelper('saci')` otteniamo una regex
 | /saci/ | | /
 | /saci/mypath | | /mypath
 | /saci/saci-1.2.3 | 1.2.3 |
-| /saci/saci-1.2.3/mypath | 1.2.3 | mypath
+| /saci/saci-1.2.3/mypath | 1.2.3 | /mypath
 
 ## Distribuzione
 Una volta verificata la nuova regola, copia il file rewriter.js aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
