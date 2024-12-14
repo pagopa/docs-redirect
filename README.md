@@ -6,9 +6,9 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
 ## Teoria delle operazioni
 
-- La URI in ingresso viene testata sulle regex elencate nell'array `regexPatterns`. 
+- La URI in ingresso viene testata sulle regex elencate nell'array `regexPatterns` con flag `active` valorizzato a _true_. 
 
-- Al primo match, viene restituito il redirect (301) alla URL ottenuta combinando la proprietà `redirectTo` della regex utilizzata ed eventuali informazioni presenti nell'URI originale.
+- Al primo match, viene restituito il redirect (301) alla URL ottenuta combinando la proprietà `redirectTo` ed eventuali informazioni presenti nell'URI originale ed estratte dalla regex stessa.
 
 - Se non è stata trovata alcuna regola, la richiesta viene restituita senza modifiche.
 
@@ -17,7 +17,7 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 - **`src/`**: Contiene il file `rewriter.js` con la logica di redirect.
 - **`tests/`**: Contiene i test per validare il comportamento del rewriter.
 
-## Flusso di Lavoro per l’Aggiunta di Nuove Regole
+## Flusso di lavoro per l’aggiunta di nuove regole
 
 1. **Aggiornamento del Codice**:  
    Modifica `src/rewriter.js` per aggiungere la nuova regola di rewrite. La nuova regola va inserita all'interno dell'array `regexPatterns`. 
@@ -38,17 +38,40 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
    > Attenzione: L'esecuzione dei test include i check di compatibilità con Javascript ECMAScript 5.1 richiesto dalle CloudFront Function!
 
 ## Helper per la scrittura di regex
-Per facilitare la scrittura delle regex di riconoscimento è disponibile l'_helper_ `versionedRegexHelper`. 
+Per facilitare la scrittura delle regex di riconoscimento sono disponibili gli _helper_: `simpleHelper` e `versionedHelper`. 
 
-Infatti la regex restituita permette di riconoscere ed isolare la versione nei path in cui è presente, come ad es.`/saci/saci-1.2.3`.
+### simpleHelper
+Riconosce semplici path identificati da una stringa iniziale statica.
+
+Il _builder_ accetta un parametro:
+- _base_: stringa iniziale dell'URI
+
+La regex crea un gruppo:
+
+- 1: (opzionale) contiene il path
+
+Ad esempio invocando l'helper `simpleHelper("manuale-servizi/manuale-servizi-v1.0")` otteniamo una regex che restituirà i seguenti valori:
+
+| URI | gruppo 1 |
+| --- | ------- |
+| "/manuale-servizi/manuale-servizi-v1.0/changelog | /changelog
+
+
+### versionedHelper
+Riconosce path in cui sono presenti informazioni di versione, come ad es. in `/saci/saci-1.2.3`.
+
+Il _builder_ accetta due parametri:
+- _base_: stringa iniziale dell'URI
+- _versionPrefix_: (opzionale) prefisso di versione da scartare
+
 La regex crea infatti i seguenti gruppi:
 
-- 1: (opzionale) contiene la stringa di versione nell'URL
+- 1: (opzionale) contiene la versione (ad eccezione di quanto specificato nel parametro _versionPrefix_)
 - 2: (opzionale) contiene il path
 
 La combinazione di queste informazioni è utilizzata nella costruzione dell'URL di redirect.
 
-Ad esempio invocando l'helper `versionedRegexHelper('saci')` otteniamo una regex che restituirà i seguenti valori:
+Ad esempio invocando l'helper `versionedHelper("saci", "saci-")` otteniamo una regex che restituirà i seguenti valori:
 
 | URI | gruppo 1 | gruppo 2
 | --- | ------- | ----
