@@ -54,7 +54,7 @@ Ad esempio invocando l'helper `simpleHelper("manuale-servizi/manuale-servizi-v1.
 
 | URI | gruppo 1 |
 | --- | ------- |
-| "/manuale-servizi/manuale-servizi-v1.0/changelog | /changelog
+| /manuale-servizi/manuale-servizi-v1.0/changelog | /changelog
 
 
 ### versionedHelper
