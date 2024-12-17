@@ -60,6 +60,10 @@ describe('Rewriter', () => {
         expect(handler(buildRequest("/sanp/sanp-3.8.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0"));
         expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
 
+        expect(handler(buildRequest("/avviso-pagamento"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/avviso-pagamento"));
+        expect(handler(buildRequest("/avviso-pagamento/per-iniziare/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/avviso-pagamento/per-iniziare/changelog"));
+        expect(handler(buildRequest("/avviso-pagamento/avvisi-3.2.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/avviso-pagamento/3.2.1"));
+        expect(handler(buildRequest("/avviso-pagamento/avvisi-3.2.1/per-iniziare/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/avviso-pagamento/3.2.1/per-iniziare/changelog"));
     });
 
     it('Should not intercept these resources', () => {

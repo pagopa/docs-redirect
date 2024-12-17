@@ -51,6 +51,10 @@ var regexPatterns = [
     {
         active: false, regex: versionedHelper("sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp"
     }
+    ,
+    {
+        active: false, regex: versionedHelper("avviso-pagamento", "avvisi-"), redirectTo: "/pago-pa/guides/avviso-pagamento"
+    }
 ];
 
 function handler(event) {
