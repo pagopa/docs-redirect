@@ -50,8 +50,7 @@ var regexPatterns = [
     },
     {
         active: false, regex: versionedHelper("sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp"
-    }
-    ,
+    },
     {
         active: false, regex: versionedHelper("avviso-pagamento", "avvisi-"), redirectTo: "/pago-pa/guides/avviso-pagamento"
     }
@@ -68,39 +67,41 @@ function handler(event) {
 
     var uri = event.request.uri;
 
-    for (var i = 0; i < regexPatterns.length && (event.request._test  || regexPatterns[i].active); i++) {
-        var pattern = regexPatterns[i];
-        var match = pattern.regex.exec(uri);
+    for (var i = 0; i < regexPatterns.length; i++) {
+        if (event.request._test || regexPatterns[i].active) {
+            var pattern = regexPatterns[i];
+            var match = pattern.regex.exec(uri);
 
-        if (match) {
-            var version = null, path = null;
+            if (match) {
+                var version = null, path = null;
 
-            if (pattern.regex._helper == "versionedHelper") {
-                version = match[1];
-                path = match[2];
-            }
-
-            if (pattern.regex._helper == "simpleHelper") {
-                path = match[1];
-            }
-
-            var targetUri = devPortalBaseURL + pattern.redirectTo;
-
-            if (version) {
-                targetUri += "/" + version;
-            }
-
-            if (path) {
-                targetUri += path;
-            }
-
-            return {
-                statusCode: 301,
-                statusDescription: "Moved Permanently",
-                headers: {
-                    location: { value: targetUri }
+                if (pattern.regex._helper == "versionedHelper") {
+                    version = match[1];
+                    path = match[2];
                 }
-            };
+
+                if (pattern.regex._helper == "simpleHelper") {
+                    path = match[1];
+                }
+
+                var targetUri = devPortalBaseURL + pattern.redirectTo;
+
+                if (version) {
+                    targetUri += "/" + version;
+                }
+
+                if (path) {
+                    targetUri += path;
+                }
+
+                return {
+                    statusCode: 301,
+                    statusDescription: "Moved Permanently",
+                    headers: {
+                        location: { value: targetUri }
+                    }
+                };
+            }
         }
     }
 
