@@ -52,6 +52,24 @@ var regexPatterns = [
         active: false, regex: versionedHelper("sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp"
     },
     {
+        active: false, regex: simpleHelper("manuale-back-office-pagopa/manuale-bo-pagopa-psp/readme"), redirectTo: "/pago-pa/guides/manuale-bo-psp/manuale-operativo-pagamenti-pagopa-prestatore-di-servizi-di-pagamento"
+    },
+    {
+        active: false, regex: simpleHelper("manuale-back-office-pagopa/manuale-bo-pagopa-psp"), redirectTo: "/pago-pa/guides/manuale-bo-psp"
+    },
+    {
+        active: false, regex: simpleHelper("manuale-back-office-pagopa/manuale-bo-pagopa-pt/readme"), redirectTo: "/pago-pa/guides/manuale-bo-pt/manuale-operativo-back-office-pagopa-partner-tecnologico"
+    },
+    {
+        active: false, regex: simpleHelper("manuale-back-office-pagopa/manuale-bo-pagopa-pt"), redirectTo: "/pago-pa/guides/manuale-bo-pt"
+    },
+    {
+        active: false, regex: simpleHelper("manuale-back-office-pagopa/readme"), redirectTo: "/pago-pa/guides/manuale-bo-ec/manuale-operativo-back-office-pagopa-ente-creditore"
+    },
+    {
+        active: false, regex: simpleHelper("manuale-back-office-pagopa"), redirectTo: "/pago-pa/guides/manuale-bo-ec"
+    },
+    {
         active: false, regex: versionedHelper("avviso-pagamento", "avvisi-"), redirectTo: "/pago-pa/guides/avviso-pagamento"
     }
 ];

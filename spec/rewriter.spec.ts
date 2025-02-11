@@ -72,6 +72,17 @@ describe('pagoPA resources', () => {
         expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
     });
 
+    it('Should intercept Manuale operativo Back Office pagoPA resources that must be redirected', () => {
+        expect(handler(buildRequest("/manuale-back-office-pagopa"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-ec"));
+        expect(handler(buildRequest("/manuale-back-office-pagopa/readme/prerequisiti-per-accesso-al-portale"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-ec/manuale-operativo-back-office-pagopa-ente-creditore/prerequisiti-per-accesso-al-portale"));
+
+        expect(handler(buildRequest("/manuale-back-office-pagopa/manuale-bo-pagopa-psp"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-psp"));
+        expect(handler(buildRequest("/manuale-back-office-pagopa/manuale-bo-pagopa-psp/readme/prerequisiti-per-accesso-al-portale"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-psp/manuale-operativo-pagamenti-pagopa-prestatore-di-servizi-di-pagamento/prerequisiti-per-accesso-al-portale"));
+
+        expect(handler(buildRequest("/manuale-back-office-pagopa/manuale-bo-pagopa-pt"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-pt"));
+        expect(handler(buildRequest("/manuale-back-office-pagopa/manuale-bo-pagopa-pt/readme/prerequisiti-per-accesso-al-portale"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-pt/manuale-operativo-back-office-pagopa-partner-tecnologico/prerequisiti-per-accesso-al-portale"));
+    });
+
     it('Should intercept avviso-pagamento resources that must be redirected', () => {
         expect(handler(buildRequest("/avviso-pagamento"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/avviso-pagamento"));
         expect(handler(buildRequest("/avviso-pagamento/per-iniziare/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/avviso-pagamento/per-iniziare/changelog"));
