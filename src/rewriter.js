@@ -49,6 +49,9 @@ var regexPatterns = [
         active: false, regex: versionedHelper("saci", "saci-"), redirectTo: "/pago-pa/guides/saci"
     },
     {
+        active: true, regex: simpleHelper("sanp/sanp-2.5.1"), redirectTo: "/pago-pa/guides/sanp/2.5.1"
+    },
+    {
         active: false, regex: versionedHelper("sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp"
     },
     {
