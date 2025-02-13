@@ -104,8 +104,13 @@ describe('Active rules', () => {
     it('Should intercept these resources', () => {
         expect(handler(buildRequest("/sanp/sanp-2.5.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
     })
+
     it('Should not intercept these resources', () => {
-        expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false)).uri).toBe( "/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog" )
+        expect(handler(buildRequest("/sanp", false)).uri).toBe( "/sanp" );
+        expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false)).uri).toBe( "/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog" );
+
+        expect(handler(buildRequest("/", false)).uri).toBe( "/" );
     })
+
 });
 
