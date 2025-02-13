@@ -82,4 +82,4 @@ Ad esempio invocando l'helper `versionedHelper("saci", "saci-")` otteniamo una r
 | /saci/saci-1.2.3/mypath | 1.2.3 | /mypath
 
 ## Distribuzione
-Una volta verificata la nuova regola, copia il file **build/rewriter.js** aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
+Una volta verificata la nuova regola, copia il file **[build/rewriter.js](/build/rewriter.js)** aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
