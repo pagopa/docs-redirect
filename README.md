@@ -19,15 +19,18 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
 ## Flusso di lavoro per l’aggiunta di nuove regole
 
-1. **Aggiornamento del Codice**:  
+1. **Aggiornamento del Codice**
+
    Modifica `src/rewriter.js` per aggiungere la nuova regola di rewrite. La nuova regola va inserita all'interno dell'array `regexPatterns`. 
 
    > Attenzione: CloudFront Function supporta JavaScript ECMAScript 5.1!
 
-2. **Creazione dei Test**:  
+2. **Creazione dei Test**
+
    Aggiungi o aggiorna i test nella cartella `tests/` per verificare la nuova regola.
 
-3. **Esecuzione dei Test**:  
+3. **Esecuzione dei Test**
+
    Esegui:
    ```bash
    npm test
@@ -36,6 +39,12 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
    Assicurati che tutti i test, inclusi quelli per la nuova regola, vengano superati.
 
    > Attenzione: L'esecuzione dei test include i check di compatibilità con Javascript ECMAScript 5.1 richiesto dalle CloudFront Function!
+
+   > Attenzione 2: questa fase crea il file [build/rewriter.js](/build/rewriter.js) che dovrà essere utilizzato per la CloudFront Function!
+
+4. **Commit**
+
+   Sincronizza il repository git in modo che il file [build/rewriter.js](/build/rewriter.js) sia aggiornato e pronto all'uso.
 
 ## Helper per la scrittura di regex
 Per facilitare la scrittura delle regex di riconoscimento sono disponibili gli _helper_: `simpleHelper` e `versionedHelper`. 
