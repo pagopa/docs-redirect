@@ -40,12 +40,6 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
    > Attenzione: L'esecuzione dei test include i check di compatibilità con Javascript ECMAScript 5.1 richiesto dalle CloudFront Function!
 
-   > Attenzione 2: questa fase crea il file [build/rewriter.js](/build/rewriter.js) che dovrà essere utilizzato per la CloudFront Function!
-
-4. **Commit**
-
-   Sincronizza il repository git in modo che il file [build/rewriter.js](/build/rewriter.js) sia aggiornato e pronto all'uso.
-
 ## Helper per la scrittura di regex
 Per facilitare la scrittura delle regex di riconoscimento sono disponibili gli _helper_: `simpleHelper` e `versionedHelper`. 
 
@@ -91,4 +85,4 @@ Ad esempio invocando l'helper `versionedHelper("saci", "saci-")` otteniamo una r
 | /saci/saci-1.2.3/mypath | 1.2.3 | /mypath
 
 ## Distribuzione
-Una volta verificata la nuova regola, copia il file **[build/rewriter.js](/build/rewriter.js)** aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
+Una volta verificata la nuova regola, copia il file **[src/rewriter.js](/src/rewriter.js)** aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
