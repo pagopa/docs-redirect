@@ -1,10 +1,10 @@
 const handler = require('./rewriter');
 
-const buildRequest = (path: string) => {
+const buildRequest = (path: string, _test: boolean = true) => {
     return {
         request: {
             uri: path,
-            _test: true
+            _test: _test
         } 
     }
 }
@@ -70,6 +70,7 @@ describe('pagoPA resources', () => {
         expect(handler(buildRequest("/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
         expect(handler(buildRequest("/sanp/sanp-3.8.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0"));
         expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
+        expect(handler(buildRequest("/sanp/sanp-2.5.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
     });
 
     it('Should intercept Manuale operativo Back Office pagoPA resources that must be redirected', () => {
@@ -97,5 +98,19 @@ describe('Unexisting resources', () => {
         expect(handler(buildRequest("/not-mapped/")).uri).toBe( "/not-mapped/" )
         expect(handler(buildRequest("/not-mapped/subpath/1.2.3")).uri).toBe( "/not-mapped/subpath/1.2.3" )
     })
+});
+
+describe('Active rules', () => {
+    it('Should intercept these resources', () => {
+        expect(handler(buildRequest("/sanp/sanp-2.5.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
+    })
+
+    it('Should not intercept these resources', () => {
+        expect(handler(buildRequest("/sanp", false)).uri).toBe( "/sanp" );
+        expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false)).uri).toBe( "/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog" );
+
+        expect(handler(buildRequest("/", false)).uri).toBe( "/" );
+    })
 
 });
+

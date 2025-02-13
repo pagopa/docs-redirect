@@ -19,15 +19,18 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
 ## Flusso di lavoro per l’aggiunta di nuove regole
 
-1. **Aggiornamento del Codice**:  
+1. **Aggiornamento del Codice**
+
    Modifica `src/rewriter.js` per aggiungere la nuova regola di rewrite. La nuova regola va inserita all'interno dell'array `regexPatterns`. 
 
    > Attenzione: CloudFront Function supporta JavaScript ECMAScript 5.1!
 
-2. **Creazione dei Test**:  
+2. **Creazione dei Test**
+
    Aggiungi o aggiorna i test nella cartella `tests/` per verificare la nuova regola.
 
-3. **Esecuzione dei Test**:  
+3. **Esecuzione dei Test**
+
    Esegui:
    ```bash
    npm test
@@ -82,4 +85,4 @@ Ad esempio invocando l'helper `versionedHelper("saci", "saci-")` otteniamo una r
 | /saci/saci-1.2.3/mypath | 1.2.3 | /mypath
 
 ## Distribuzione
-Una volta verificata la nuova regola, copia il file rewriter.js aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
+Una volta verificata la nuova regola, copia il file **[src/rewriter.js](/src/rewriter.js)** aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.

@@ -128,3 +128,5 @@ function handler(event) {
 
     return event.request;
 }
+
+module.exports = handler;
