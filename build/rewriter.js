@@ -5,8 +5,11 @@
  *****************************************************/
 var devPortalBaseURL = "https://developer.pagopa.it";
 
-var simpleHelper = function(base) {
-    var stringRegex = base.replaceAll("/", "\\/").replaceAll(".", "\\.") + "(.*)";
+var simpleHelper = function(base, usePath) {
+    var stringRegex = base.replaceAll("/", "\\/").replaceAll(".", "\\.");
+    if (usePath === undefined) {
+        stringRegex += "(.*)";
+    }
     var regex = new RegExp(stringRegex);
     regex._helper = "simpleHelper";
     return regex;
@@ -111,7 +114,7 @@ function handler(event) {
                     targetUri += "/" + version;
                 }
 
-                if (path) {
+                if (path != null) {
                     targetUri += path;
                 }
 
