@@ -9,8 +9,12 @@ var stringToRegex = function(strToRegex) {
     return strToRegex.replaceAll("/", "\\/").replaceAll(".", "\\.")
 }
 
-var simpleHelper = function(base) {
-    var stringRegex = stringToRegex(base) + "(.*)";
+var simpleHelper = function(base, usePath) {
+    var stringRegex = stringToRegex(base);
+    if (usePath === undefined) {
+        stringRegex += "(.*)";
+    }
+
     var regex = new RegExp(stringRegex);
     regex._helper = "simpleHelper";
     return regex;
@@ -28,6 +32,9 @@ var versionedHelper = function(base, versionPrefix) {
 };
 
 var regexPatterns = [
+    {
+        regex: simpleHelper("/io-guida-tecnica/v5.2-preview", false), redirectTo: "/app-io/guides"
+    },
     {
         regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-2.3"), redirectTo: "/app-io/guides/io-guida-tecnica/v2.3"
     },
