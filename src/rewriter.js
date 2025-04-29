@@ -43,7 +43,10 @@ var regexPatterns = [
         active: false, regex: versionedHelper("carta-giovani-nazionale"), redirectTo: "/app-io/guides/carta-giovani-nazionale"
     },
     {
-        active: false, regex: versionedHelper("manuale-operativo-di-firma-con-io"), redirectTo: "/app-io/guides/manuale-operativo"
+        active: true, regex: versionedHelper("manuale-operativo-di-firma-con-io"), redirectTo: "/firma-con-io/guides/manuale-operativo"
+    },
+    {
+        active: true, regex: versionedHelper("guida-alla-scelta-di-firma-con-io"), redirectTo: "/firma-con-io/guides/guida-scelta-firma"
     },
     {
         active: false, regex: versionedHelper("saci", "saci-"), redirectTo: "/pago-pa/guides/saci"

@@ -44,13 +44,18 @@ describe('IO resources', () => {
     it('Should intercept carta-giovani-nazionale resources that must be redirected', () => {
         expect(handler(buildRequest("/carta-giovani-nazionale"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale"));
         expect(handler(buildRequest("/carta-giovani-nazionale/premessa"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale/premessa"));
-        expect(handler(buildRequest("/carta-giovani-nazionale/v2.0.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale/v2.0.0")); 
-        expect(handler(buildRequest("/carta-giovani-nazionale/v2.0.0/premessa"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale/v2.0.0/premessa")); 
+        expect(handler(buildRequest("/carta-giovani-nazionale/v2.0.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale/v2.0.0"));
+        expect(handler(buildRequest("/carta-giovani-nazionale/v2.0.0/premessa"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale/v2.0.0/premessa"));
     });
 
     it('Should intercept manuale-operativo-di-firma-con-io resources that must be redirected', () => {
-        expect(handler(buildRequest("/manuale-operativo-di-firma-con-io"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-operativo")); 
-        expect(handler(buildRequest("/manuale-operativo-di-firma-con-io/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-operativo/changelog")); 
+        expect(handler(buildRequest("/manuale-operativo-di-firma-con-io"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/manuale-operativo"));
+        expect(handler(buildRequest("/manuale-operativo-di-firma-con-io/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/manuale-operativo/changelog"));
+    });
+
+    it('Should intercept guida-alla-scelta-di-firma-con-io resources that must be redirected', () => {
+        expect(handler(buildRequest("/guida-alla-scelta-di-firma-con-io"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/guida-scelta-firma"));
+        expect(handler(buildRequest("/guida-alla-scelta-di-firma-con-io/v1.0"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/guida-scelta-firma/v1.0"));
     });
 
 });
