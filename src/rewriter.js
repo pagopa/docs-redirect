@@ -17,7 +17,7 @@ var versionedHelper = function(base, versionPrefix) {
     if (versionPrefix) {
         stringRegex += versionPrefix;
     }
-    stringRegex += "(v?\\d+(?:\\.\\d+(?:\\.\\d+)?)?))?(.*)";
+    stringRegex += "(v?\\d+(?:\\.\\d+)?(?:\\.\\d+)?)(?:\\-\\d+)?)?(.*)";
     var regex = new RegExp(stringRegex);
     regex._helper = "versionedHelper";
     return regex;
@@ -77,7 +77,14 @@ var regexPatterns = [
     },
     {
         active: false, regex: versionedHelper("avviso-pagamento", "avvisi-"), redirectTo: "/pago-pa/guides/avviso-pagamento"
+    },
+    {
+        active: true, regex: versionedHelper("manuale-operativo"), redirectTo: "/send/guides/manuale-operativo"
+    },
+    {
+        active: true, regex: versionedHelper("f.a.q.-per-integratori"), redirectTo: "/send/guides/knowledge-base"
     }
+
 ];
 
 function handler(event) {

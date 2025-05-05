@@ -110,6 +110,27 @@ describe('Active rules', () => {
         expect(handler(buildRequest("/guida-alla-scelta-di-firma-con-io/v1.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/guida-scelta-firma/v1.0"));
     });
 
+    it('Should intercept SEND\'s manuale-operativo resources that must be redirected', () => {
+        expect(handler(buildRequest("/manuale-operativo", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo"));
+        expect(handler(buildRequest("/manuale-operativo/piattaforma-notifiche-digitali-manuale-operativo/glossario", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/piattaforma-notifiche-digitali-manuale-operativo/glossario"));
+        expect(handler(buildRequest("/manuale-operativo/v1.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/v1.0"));
+        expect(handler(buildRequest("/manuale-operativo/v1.0.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/v1.0.1"));
+        expect(handler(buildRequest("/manuale-operativo/v1.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/v1.1"));
+        expect(handler(buildRequest("/manuale-operativo/v1.1-1", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/v1.1"));
+        expect(handler(buildRequest("/manuale-operativo/v1.1.3", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/v1.1.3"));
+    });
+
+    it('Should intercept SEND\'s knowledge-base resources that must be redirected', () => {
+        expect(handler(buildRequest("/f.a.q.-per-integratori", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base"));
+        expect(handler(buildRequest("/f.a.q.-per-integratori/v1.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v1.0"));
+        expect(handler(buildRequest("/f.a.q.-per-integratori/v1.0-1", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v1.0"));
+        expect(handler(buildRequest("/f.a.q.-per-integratori/v2.0-2", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.0"));
+        expect(handler(buildRequest("/f.a.q.-per-integratori/v2.1-2", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.1"));
+        expect(handler(buildRequest("/f.a.q.-per-integratori/v2.3-1", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.3"));
+        expect(handler(buildRequest("/f.a.q.-per-integratori/v2.4-1", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.4"));
+        expect(handler(buildRequest("/f.a.q.-per-integratori/v2.5", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.5"));
+    });
+
     it('Should not intercept these resources', () => {
         expect(handler(buildRequest("/sanp", false)).uri).toBe( "/sanp" );
         expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false)).uri).toBe( "/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog" );
