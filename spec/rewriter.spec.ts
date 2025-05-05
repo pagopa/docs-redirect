@@ -51,23 +51,6 @@ describe('IO resources', () => {
 });
 
 describe('pagoPA resources', () => {
-    it('Should intercept SACI resources that must be redirected', () => {
-        expect(handler(buildRequest("/saci"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci"));
-        expect(handler(buildRequest("/saci/"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/"));
-        expect(handler(buildRequest("/saci/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"));
-        expect(handler(buildRequest("/saci/saci-3.2.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0"));
-        expect(handler(buildRequest("/saci/saci-3.2.0/"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0/"));
-        expect(handler(buildRequest("/saci/saci-3.2.0/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"));
-    });
-
-    it('Should intercept SANP resources that must be redirected', () => {
-        expect(handler(buildRequest("/sanp"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp"));
-        expect(handler(buildRequest("/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
-        expect(handler(buildRequest("/sanp/sanp-3.8.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0"));
-        expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
-        expect(handler(buildRequest("/sanp/sanp-2.5.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
-    });
-
     it('Should intercept Manuale operativo Back Office pagoPA resources that must be redirected', () => {
         expect(handler(buildRequest("/manuale-back-office-pagopa"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-ec"));
         expect(handler(buildRequest("/manuale-back-office-pagopa/readme/prerequisiti-per-accesso-al-portale"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/manuale-bo-ec/manuale-operativo-back-office-pagopa-ente-creditore/prerequisiti-per-accesso-al-portale"));
@@ -131,10 +114,28 @@ describe('Active rules', () => {
         expect(handler(buildRequest("/f.a.q.-per-integratori/v2.5", false))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.5"));
     });
 
-    it('Should not intercept these resources', () => {
-        expect(handler(buildRequest("/sanp", false)).uri).toBe( "/sanp" );
-        expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false)).uri).toBe( "/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog" );
+    it('Should intercept SACI resources that must be redirected', () => {
+        expect(handler(buildRequest("/saci", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci"));
+        expect(handler(buildRequest("/saci/", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/"));
+        expect(handler(buildRequest("/saci/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"));
+        expect(handler(buildRequest("/saci/saci-3.2.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0"));
+        expect(handler(buildRequest("/saci/saci-3.2.0/", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0/"));
+        expect(handler(buildRequest("/saci/saci-3.2.0/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"));
+        expect(handler(buildRequest("/saci/saci-3.2.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.1"));
+    });
 
+    it('Should intercept SANP resources that must be redirected', () => {
+        expect(handler(buildRequest("/sanp", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp"));
+        expect(handler(buildRequest("/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
+        expect(handler(buildRequest("/sanp/sanp-2.5.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
+        expect(handler(buildRequest("/sanp/sanp-3.0.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.0.0"));
+        expect(handler(buildRequest("/sanp/sanp-3.8.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0"));
+        expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
+        expect(handler(buildRequest("/sanp/sanp-3.9.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.0"));
+        expect(handler(buildRequest("/sanp/sanp-3.9.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.1"));
+    });
+
+    it('Should not intercept these resources', () => {
         expect(handler(buildRequest("/", false)).uri).toBe( "/" );
     })
 

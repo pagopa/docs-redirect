@@ -49,13 +49,10 @@ var regexPatterns = [
         active: true, regex: versionedHelper("guida-alla-scelta-di-firma-con-io"), redirectTo: "/firma-con-io/guides/guida-scelta-firma"
     },
     {
-        active: false, regex: versionedHelper("saci", "saci-"), redirectTo: "/pago-pa/guides/saci"
+        active: true, regex: versionedHelper("saci", "saci-"), redirectTo: "/pago-pa/guides/saci"
     },
     {
-        active: true, regex: simpleHelper("sanp/sanp-2.5.1"), redirectTo: "/pago-pa/guides/sanp/2.5.1"
-    },
-    {
-        active: false, regex: versionedHelper("sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp"
+        active: true, regex: versionedHelper("sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp"
     },
     {
         active: false, regex: simpleHelper("manuale-back-office-pagopa/manuale-bo-pagopa-psp/readme"), redirectTo: "/pago-pa/guides/manuale-bo-psp/manuale-operativo-pagamenti-pagopa-prestatore-di-servizi-di-pagamento"
