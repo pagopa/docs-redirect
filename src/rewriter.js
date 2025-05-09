@@ -25,19 +25,16 @@ var versionedHelper = function(base, versionPrefix) {
 
 var regexPatterns = [
     {
-        active: false, regex: simpleHelper("io-guida-tecnica/guida-tecnica-1.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.2"
+        active: true, regex: simpleHelper("io-guida-tecnica/guida-tecnica-1.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.2"
     },
     {
-        active: false, regex: versionedHelper("io-guida-tecnica"), redirectTo: "/app-io/guides/io-guida-tecnica"
+        active: true, regex: versionedHelper("io-guida-tecnica"), redirectTo: "/app-io/guides/io-guida-tecnica"
     },
     {
-        active: false, regex: simpleHelper("manuale-servizi/manuale-servizi-v1.0"), redirectTo: "/app-io/guides/manuale-servizi/v1.0"
+        active: true, regex: simpleHelper("manuale-servizi/manuale-servizi-v1.0"), redirectTo: "/app-io/guides/manuale-servizi/v1.0"
     },
     {
-        active: false, regex: simpleHelper("manuale-servizi/v1.1-2"), redirectTo: "/app-io/guides/manuale-servizi/v1.1"
-    },
-    {
-        active: false, regex: versionedHelper("manuale-servizi"), redirectTo: "/app-io/guides/manuale-servizi"
+        active: true, regex: versionedHelper("manuale-servizi"), redirectTo: "/app-io/guides/manuale-servizi"
     },
     {
         active: false, regex: versionedHelper("carta-giovani-nazionale"), redirectTo: "/app-io/guides/carta-giovani-nazionale"

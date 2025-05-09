@@ -21,26 +21,6 @@ const buildResponse = (path: string) => {
 
 describe('IO resources', () => {
 
-    it('Should intercept io-guida-tecnica resources that must be redirected', () => {
-        expect(handler(buildRequest("/io-guida-tecnica"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica"));
-        expect(handler(buildRequest("/io-guida-tecnica/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/changelog"));
-        expect(handler(buildRequest("/io-guida-tecnica/v5.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0"));
-        expect(handler(buildRequest("/io-guida-tecnica/v5.0/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0/changelog"));
-        expect(handler(buildRequest("/io-guida-tecnica/guida-tecnica-1.2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v1.2"));
-    });
-
-    it('Should intercept manuale-servizi resources that must be redirected', () => {
-        expect(handler(buildRequest("/manuale-servizi"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi"));
-        expect(handler(buildRequest("/manuale-servizi/storico-delle-modifiche"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/storico-delle-modifiche"));
-        expect(handler(buildRequest("/manuale-servizi/v2.4"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.4"));
-        expect(handler(buildRequest("/manuale-servizi/v2.4/storico-delle-modifiche"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.4/storico-delle-modifiche"));
-        expect(handler(buildRequest("/manuale-servizi/v1.1-2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.1"));
-        expect(handler(buildRequest("/manuale-servizi/v1.1-2/storico-delle-modifiche"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.1/storico-delle-modifiche"));
-
-        expect(handler(buildRequest("/manuale-servizi/manuale-servizi-v1.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.0"));
-        expect(handler(buildRequest("/manuale-servizi/manuale-servizi-v1.0/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.0/changelog"));
-    });
-
     it('Should intercept carta-giovani-nazionale resources that must be redirected', () => {
         expect(handler(buildRequest("/carta-giovani-nazionale"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale"));
         expect(handler(buildRequest("/carta-giovani-nazionale/premessa"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/carta-giovani-nazionale/premessa"));
@@ -133,6 +113,26 @@ describe('Active rules', () => {
         expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
         expect(handler(buildRequest("/sanp/sanp-3.9.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.0"));
         expect(handler(buildRequest("/sanp/sanp-3.9.1", false))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.1"));
+    });
+
+    it('Should intercept manuale-servizi resources that must be redirected', () => {
+        expect(handler(buildRequest("/manuale-servizi", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi"));
+        expect(handler(buildRequest("/manuale-servizi/storico-delle-modifiche", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/storico-delle-modifiche"));
+        expect(handler(buildRequest("/manuale-servizi/v2.4", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.4"));
+        expect(handler(buildRequest("/manuale-servizi/v2.4/storico-delle-modifiche", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.4/storico-delle-modifiche"));
+        expect(handler(buildRequest("/manuale-servizi/v1.1-2", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.1"));
+        expect(handler(buildRequest("/manuale-servizi/v1.1-2/storico-delle-modifiche", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.1/storico-delle-modifiche"));
+
+        expect(handler(buildRequest("/manuale-servizi/manuale-servizi-v1.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.0"));
+        expect(handler(buildRequest("/manuale-servizi/manuale-servizi-v1.0/changelog", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.0/changelog"));
+    });
+
+    it('Should intercept io-guida-tecnica resources that must be redirected', () => {
+        expect(handler(buildRequest("/io-guida-tecnica", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica"));
+        expect(handler(buildRequest("/io-guida-tecnica/changelog", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/changelog"));
+        expect(handler(buildRequest("/io-guida-tecnica/v5.0", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0"));
+        expect(handler(buildRequest("/io-guida-tecnica/v5.0/changelog", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0/changelog"));
+        expect(handler(buildRequest("/io-guida-tecnica/guida-tecnica-1.2", false))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v1.2"));
     });
 
     it('Should not intercept these resources', () => {
