@@ -112,8 +112,8 @@ describe('IO rules', () => {
     it('Should intercept io-guida-tecnica resources that must be redirected', () => {
         expect(handler(buildRequest("/io-guida-tecnica"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica"));
         expect(handler(buildRequest("/io-guida-tecnica/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/changelog"));
-        expect(handler(buildRequest("/io-guida-tecnica/v5.2-preview"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides"));
-        expect(handler(buildRequest("/io-guida-tecnica/v5.2-preview/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides"));
+        expect(handler(buildRequest("/io-guida-tecnica/v5.2-preview"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v6.0"));
+        expect(handler(buildRequest("/io-guida-tecnica/v5.2-preview/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v6.0/changelog"));
         expect(handler(buildRequest("/io-guida-tecnica/v5.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0"));
         expect(handler(buildRequest("/io-guida-tecnica/v5.0/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0/changelog"));
         expect(handler(buildRequest("/io-guida-tecnica/v2.4/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v2.4/changelog"));

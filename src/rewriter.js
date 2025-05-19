@@ -33,7 +33,7 @@ var versionedHelper = function(base, versionPrefix) {
 
 var regexPatterns = [
     {
-        regex: simpleHelper("/io-guida-tecnica/v5.2-preview", false), redirectTo: "/app-io/guides"
+        regex: versionedHelper("/io-guida-tecnica/v5.2-preview"), redirectTo: "/app-io/guides/io-guida-tecnica/v6.0"
     },
     {
         regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-2.3"), redirectTo: "/app-io/guides/io-guida-tecnica/v2.3"
