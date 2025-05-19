@@ -46,19 +46,25 @@ Per facilitare la scrittura delle regex di riconoscimento sono disponibili gli _
 ### simpleHelper
 Riconosce semplici path identificati da una stringa iniziale statica.
 
-Il _builder_ accetta un parametro:
+Il _builder_ accetta due parametri:
 - _base_: stringa iniziale dell'URI
+- _usePath_ : indica alla regex se riconoscere come gruppo la stringa che segue _base_
 
 La regex crea un gruppo:
 
-- 1: (opzionale) contiene il path
+- 1: (opzionale) contiene il path se _usePath_ è _true_
 
-Ad esempio invocando l'helper `simpleHelper("manuale-servizi/manuale-servizi-v1.0")` otteniamo una regex che restituirà i seguenti valori:
+Ad esempio invocando l'helper `simpleHelper("/path_molto_esteso/sotto-path/path_finale")` otteniamo una regex che restituirà i seguenti valori:
 
 | URI | gruppo 1 |
 | --- | ------- |
-| /manuale-servizi/manuale-servizi-v1.0/changelog | /changelog
+| /path_molto_esteso/sotto_path/path_finale | /path_finale
 
+Mentre se invochiamo lo stesso helper `simpleHelper("/path_molto_esteso/sotto-path/path_finale", false)` otteniamo
+
+| URI | gruppo 1 |
+| --- | ------- |
+| /path_molto_esteso/sotto_path/path_finale | _null_
 
 ### versionedHelper
 Riconosce path in cui sono presenti informazioni di versione, come ad es. in `/saci/saci-1.2.3`.
