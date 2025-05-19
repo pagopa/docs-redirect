@@ -19,18 +19,17 @@ const buildResponse = (path: string) => {
 }
 
 describe('Unexisting resources', () => {
-    it('Should not intercept these resources', () => {
+    it('Should not intercept root resource', () => {
+        expect(handler(buildRequest("/")).uri).toBe( "/" );
+    })
+
+    it('Should not intercept not existing nor mapped resources', () => {
         expect(handler(buildRequest("/not-mapped/")).uri).toBe( "/not-mapped/" )
         expect(handler(buildRequest("/not-mapped/subpath/1.2.3")).uri).toBe( "/not-mapped/subpath/1.2.3" )
     })
 });
 
-describe('Active rules', () => {
-
-    it('Should intercept these resources', () => {
-        expect(handler(buildRequest("/sanp/sanp-2.5.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
-    })
-
+describe('Firma con IO rules', () => {
     it('Should intercept manuale-operativo-di-firma-con-io resources that must be redirected', () => {
         expect(handler(buildRequest("/manuale-operativo-di-firma-con-io"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/manuale-operativo"));
         expect(handler(buildRequest("/manuale-operativo-di-firma-con-io/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/manuale-operativo/changelog"));
@@ -40,7 +39,9 @@ describe('Active rules', () => {
         expect(handler(buildRequest("/guida-alla-scelta-di-firma-con-io"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/guida-scelta-firma"));
         expect(handler(buildRequest("/guida-alla-scelta-di-firma-con-io/v1.0"))).toEqual(buildResponse( "https://developer.pagopa.it/firma-con-io/guides/guida-scelta-firma/v1.0"));
     });
+});
 
+describe('SEND rules', () => {
     it('Should intercept SEND\'s manuale-operativo resources that must be redirected', () => {
         expect(handler(buildRequest("/manuale-operativo"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo"));
         expect(handler(buildRequest("/manuale-operativo/piattaforma-notifiche-digitali-manuale-operativo/glossario"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/piattaforma-notifiche-digitali-manuale-operativo/glossario"));
@@ -61,6 +62,9 @@ describe('Active rules', () => {
         expect(handler(buildRequest("/f.a.q.-per-integratori/v2.4-1"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.4"));
         expect(handler(buildRequest("/f.a.q.-per-integratori/v2.5"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.5"));
     });
+});
+
+describe('pagoPA rules', () => {
 
     it('Should intercept SACI resources that must be redirected', () => {
         expect(handler(buildRequest("/saci"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci"));
@@ -82,6 +86,9 @@ describe('Active rules', () => {
         expect(handler(buildRequest("/sanp/sanp-3.9.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.0"));
         expect(handler(buildRequest("/sanp/sanp-3.9.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.1"));
     });
+});
+
+describe('IO rules', () => {
 
     it('Should intercept manuale-servizi resources that must be redirected', () => {
         expect(handler(buildRequest("/manuale-servizi"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi"));
@@ -101,10 +108,6 @@ describe('Active rules', () => {
         expect(handler(buildRequest("/io-guida-tecnica/v5.0/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0/changelog"));
         expect(handler(buildRequest("/io-guida-tecnica/guida-tecnica-1.2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v1.2"));
     });
-
-    it('Should not intercept these resources', () => {
-        expect(handler(buildRequest("/")).uri).toBe( "/" );
-    })
 
 });
 
