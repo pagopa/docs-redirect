@@ -70,21 +70,22 @@ describe('pagoPA rules', () => {
         expect(handler(buildRequest("/saci"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci"));
         expect(handler(buildRequest("/saci/"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/"));
         expect(handler(buildRequest("/saci/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"));
+        expect(handler(buildRequest("/saci/saci-3.2.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.1"));
+        expect(handler(buildRequest("/saci/saci-3.2.1/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.1/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/changelog"));
         expect(handler(buildRequest("/saci/saci-3.2.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0"));
         expect(handler(buildRequest("/saci/saci-3.2.0/"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0/"));
         expect(handler(buildRequest("/saci/saci-3.2.0/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.0/specifiche-attuative-dei-codici-identificativi-di-versamento-riversamento-e-rendicontazione/generazione-dellidentificativo-univoco-di-versamento"));
-        expect(handler(buildRequest("/saci/saci-3.2.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/saci/3.2.1"));
     });
 
     it('Should intercept SANP resources that must be redirected', () => {
         expect(handler(buildRequest("/sanp"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp"));
         expect(handler(buildRequest("/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
-        expect(handler(buildRequest("/sanp/sanp-2.5.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
+        expect(handler(buildRequest("/sanp/sanp-3.9.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.1"));
+        expect(handler(buildRequest("/sanp/sanp-3.9.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.0"));
         expect(handler(buildRequest("/sanp/sanp-3.0.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.0.0"));
         expect(handler(buildRequest("/sanp/sanp-3.8.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0"));
         expect(handler(buildRequest("/sanp/sanp-3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.8.0/specifiche-attuative-del-nodo-dei-pagamenti-spc/changelog"));
-        expect(handler(buildRequest("/sanp/sanp-3.9.0"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.0"));
-        expect(handler(buildRequest("/sanp/sanp-3.9.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/3.9.1"));
+        expect(handler(buildRequest("/sanp/sanp-2.5.1"))).toEqual(buildResponse( "https://developer.pagopa.it/pago-pa/guides/sanp/2.5.1"));
     });
 });
 
@@ -93,8 +94,15 @@ describe('IO rules', () => {
     it('Should intercept manuale-servizi resources that must be redirected', () => {
         expect(handler(buildRequest("/manuale-servizi"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi"));
         expect(handler(buildRequest("/manuale-servizi/storico-delle-modifiche"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/storico-delle-modifiche"));
+        expect(handler(buildRequest("/manuale-servizi/v3.0/storico-delle-modifiche"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v3.0/storico-delle-modifiche"));
+        expect(handler(buildRequest("/manuale-servizi/v3.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v3.0"));
+        expect(handler(buildRequest("/manuale-servizi/v2.6"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.6"));
+        expect(handler(buildRequest("/manuale-servizi/v2.5"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.5"));
         expect(handler(buildRequest("/manuale-servizi/v2.4"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.4"));
-        expect(handler(buildRequest("/manuale-servizi/v2.4/storico-delle-modifiche"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.4/storico-delle-modifiche"));
+        expect(handler(buildRequest("/manuale-servizi/v2.3-2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.3"));
+        expect(handler(buildRequest("/manuale-servizi/v2.2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.2"));
+        expect(handler(buildRequest("/manuale-servizi/v2.1"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.1"));
+        expect(handler(buildRequest("/manuale-servizi/v2.0-1"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v2.0"));
         expect(handler(buildRequest("/manuale-servizi/v1.1-2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.1"));
         expect(handler(buildRequest("/manuale-servizi/v1.1-2/storico-delle-modifiche"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.1/storico-delle-modifiche"));
         expect(handler(buildRequest("/manuale-servizi/manuale-servizi-v1.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/manuale-servizi/v1.0"));
@@ -106,6 +114,12 @@ describe('IO rules', () => {
         expect(handler(buildRequest("/io-guida-tecnica/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/changelog"));
         expect(handler(buildRequest("/io-guida-tecnica/v5.0"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0"));
         expect(handler(buildRequest("/io-guida-tecnica/v5.0/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v5.0/changelog"));
+        expect(handler(buildRequest("/io-guida-tecnica/v2.4/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v2.4/changelog"));
+        expect(handler(buildRequest("/io-guida-tecnica/v2.4"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v2.4"));
+        expect(handler(buildRequest("/io-guida-tecnica/io-guida-tecnica-2.3/changelog"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v2.3/changelog"));
+        expect(handler(buildRequest("/io-guida-tecnica/io-guida-tecnica-2.3"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v2.3"));
+        expect(handler(buildRequest("/io-guida-tecnica/io-guida-tecnica-2.2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v2.2"));
+        expect(handler(buildRequest("/io-guida-tecnica/io-guida-tecnica-1.3"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v1.3"));
         expect(handler(buildRequest("/io-guida-tecnica/guida-tecnica-1.2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v1.2"));
     });
 

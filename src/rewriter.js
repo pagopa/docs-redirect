@@ -18,7 +18,7 @@ var simpleHelper = function(base) {
 
 var versionedHelper = function(base, versionPrefix) {
     var stringRegex = stringToRegex(base) + "(\\/)?";
-    if (versionPrefix) {
+    if (typeof versionPrefix !== 'undefined' && versionPrefix !== null ) {
         stringRegex += "(?:" + stringToRegex(versionPrefix) + ")?";
     }
     stringRegex += "(v?\\d+(?:\\.\\d+)*)?(?:\\-\\d+)?(.*)";
@@ -28,6 +28,15 @@ var versionedHelper = function(base, versionPrefix) {
 };
 
 var regexPatterns = [
+    {
+        regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-2.3"), redirectTo: "/app-io/guides/io-guida-tecnica/v2.3"
+    },
+    {
+        regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-2.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v2.2"
+    },
+    {
+        regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-1.3"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.3"
+    },
     {
         regex: versionedHelper("/io-guida-tecnica/guida-tecnica-1.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.2"
     },
