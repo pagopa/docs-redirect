@@ -11,7 +11,7 @@ var stringToRegex = function(strToRegex) {
 
 var simpleHelper = function(base, usePath) {
     var stringRegex = stringToRegex(base);
-    if (usePath === undefined) {
+    if (usePath === undefined || usePath != false) {
         stringRegex += "(.*)";
     }
 
