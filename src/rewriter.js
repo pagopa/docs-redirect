@@ -25,7 +25,7 @@ var versionedHelper = function(base, versionPrefix) {
     if (typeof versionPrefix !== 'undefined' && versionPrefix !== null ) {
         stringRegex += "(?:" + stringToRegex(versionPrefix) + ")?";
     }
-    stringRegex += "(v?\\d+(?:\\.\\d+)*)?(?:\\-\\d+)?(.*)";
+    stringRegex += "v?(\\d+(?:\\.\\d+)*)?(?:\\-\\d+)?(.*)";
     var regex = new RegExp(stringRegex);
     regex._helper = "versionedHelper";
     return regex;
@@ -36,16 +36,10 @@ var regexPatterns = [
         regex: versionedHelper("/io-guida-tecnica/v5.2-preview"), redirectTo: "/app-io/guides/io-guida-tecnica/v6.0"
     },
     {
-        regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-2.3"), redirectTo: "/app-io/guides/io-guida-tecnica/v2.3"
-    },
-    {
-        regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-2.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v2.2"
-    },
-    {
-        regex: versionedHelper("/io-guida-tecnica/io-guida-tecnica-1.3"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.3"
-    },
-    {
         regex: versionedHelper("/io-guida-tecnica/guida-tecnica-1.2"), redirectTo: "/app-io/guides/io-guida-tecnica/v1.2"
+    },
+    {
+        regex: versionedHelper("/io-guida-tecnica", "io-guida-tecnica-"), redirectTo: "/app-io/guides/io-guida-tecnica"
     },
     {
         regex: versionedHelper("/io-guida-tecnica"), redirectTo: "/app-io/guides/io-guida-tecnica"
@@ -63,10 +57,10 @@ var regexPatterns = [
         regex: versionedHelper("/guida-alla-scelta-di-firma-con-io"), redirectTo: "/firma-con-io/guides/guida-scelta-firma"
     },
     {
-        regex: versionedHelper("/saci","saci-"), redirectTo: "/pago-pa/guides/saci"
+        regex: versionedHelper("/saci","saci-"), redirectTo: "/pago-pa/guides/saci", redirectVersionPrefix: ""
     },
     {
-        regex: versionedHelper("/sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp"
+        regex: versionedHelper("/sanp", "sanp-"), redirectTo: "/pago-pa/guides/sanp", redirectVersionPrefix: ""
     },    
     {
         regex: versionedHelper("/manuale-operativo"), redirectTo: "/send/guides/manuale-operativo"
@@ -90,6 +84,7 @@ function handler(event) {
     for (var i = 0; i < regexPatterns.length; i++) {
         var pattern = regexPatterns[i];
         var match = pattern.regex.exec(uri);
+        var redirectVersionPrefix = pattern.redirectVersionPrefix;
 
         if (match) {
             var preVersionPath = null, version = null, path = null;
@@ -107,7 +102,13 @@ function handler(event) {
             var targetUri = devPortalBaseURL + pattern.redirectTo;
 
             if (version) {
-                targetUri += "/" + version;
+                targetUri += "/";
+                if (redirectVersionPrefix !== undefined && redirectVersionPrefix != null) {
+                    targetUri += redirectVersionPrefix;
+                } else {
+                    targetUri += "v";
+                }
+                targetUri += version;
             } else {
                 if (preVersionPath) {
                     targetUri += "/";
