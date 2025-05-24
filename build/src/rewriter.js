@@ -1,4 +1,9 @@
 "use strict";
+/*****************************************************
+ * Before modifying the code here below, please      *
+ * follow the instructions here:                     *
+ * https://github.com/pagopa/docs-redirect/README.md *
+ *****************************************************/
 var devPortalBaseURL = "https://developer.pagopa.it";
 var stringToRegex = function (s) {
     return s.replace(/\//g, "\\/").replace(/\./g, "\\.");
