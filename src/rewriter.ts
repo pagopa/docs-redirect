@@ -81,9 +81,7 @@ const regexPatterns: RegexPattern[] = [
   { regex: versionedHelper("/f.a.q.-per-integratori"), redirectTo: "/send/guides/knowledge-base" }
 ];
 
-function handler(
-  event: handler.CloudFrontEvent
-): handler.CloudFrontRequest | handler.RedirectResponse | handler.ErrorResponse {
+function handler( event: handler.CloudFrontEvent): handler.CloudFrontRequest | handler.RedirectResponse | handler.ErrorResponse {
   const uri = event?.request?.uri;
 
   if (typeof uri !== "string") {
@@ -104,8 +102,8 @@ function handler(
 
     if (regex._helper === "versionedHelper") {
       preVersionPath = match[1] ?? null;
-      version         = match[2] ?? null;
-      path            = match[3] ?? null;
+      version = match[2] ?? null;
+      path = match[3] ?? null;
     } else {
       path = match[1] ?? null;
     }
