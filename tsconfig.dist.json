@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "plugins": [
+      {
+        "transform": "./scripts/removeExportTransformer.js",
+        "import": "default",  
+        "before": true
+      }
+    ]
+  },
+  "include": [
+    "src/rewriter.ts",
+  ]
+}

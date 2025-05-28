@@ -1,4 +1,8 @@
-const handler = require('./rewriter');
+import handler = require("../src/rewriter");
+
+// ora i tipi si recuperano così:
+type RedirectResponse = handler.RedirectResponse;
+type CloudFrontRequest = handler.CloudFrontRequest;
 
 const buildRequest = (path: string) => {
     return {
@@ -8,7 +12,7 @@ const buildRequest = (path: string) => {
     }
 }
 
-const buildResponse = (path: string) => {
+const buildResponse = (path: string): RedirectResponse => {
     return {
         statusCode: 301,
         statusDescription: "Moved Permanently",
@@ -20,12 +24,12 @@ const buildResponse = (path: string) => {
 
 describe('Unexisting resources', () => {
     it('Should not intercept root resource', () => {
-        expect(handler(buildRequest("/")).uri).toBe( "/" );
+        expect((handler(buildRequest("/")) as CloudFrontRequest).uri).toBe( "/" );
     })
 
     it('Should not intercept not existing nor mapped resources', () => {
-        expect(handler(buildRequest("/not-mapped/")).uri).toBe( "/not-mapped/" )
-        expect(handler(buildRequest("/not-mapped/subpath/1.2.3")).uri).toBe( "/not-mapped/subpath/1.2.3" )
+        expect((handler(buildRequest("/not-mapped/")) as CloudFrontRequest).uri).toBe( "/not-mapped/" );
+        expect((handler(buildRequest("/not-mapped/subpath/1.2.3")) as CloudFrontRequest).uri).toBe( "/not-mapped/subpath/1.2.3" );
     })
 });
 

@@ -21,9 +21,7 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
 1. **Aggiornamento del Codice**
 
-   Modifica `src/rewriter.js` per aggiungere la nuova regola di rewrite. La nuova regola va inserita all'interno dell'array `regexPatterns`. 
-
-   > Attenzione: CloudFront Function supporta JavaScript ECMAScript 5.1!
+   Modifica `src/rewriter.ts` per aggiungere la nuova regola di rewrite. La nuova regola va inserita all'interno dell'array `regexPatterns`. 
 
 2. **Creazione dei Test**
 
@@ -38,7 +36,12 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
    Assicurati che tutti i test, inclusi quelli per la nuova regola, vengano superati.
 
-   > Attenzione: L'esecuzione dei test include i check di compatibilità con Javascript ECMAScript 5.1 richiesto dalle CloudFront Function!
+4. **Creazione del file di distribuzione**
+
+   Esegui:
+   ```bash
+   npm run dist
+    ```
 
 ## Helper per la scrittura di regex
 Per facilitare la scrittura delle regex di riconoscimento sono disponibili gli _helper_: `simpleHelper` e `versionedHelper`. 
@@ -91,4 +94,4 @@ Ad esempio invocando l'helper `versionedHelper("saci", "saci-")` otteniamo una r
 | /saci/saci-1.2.3/mypath | 1.2.3 | /mypath
 
 ## Distribuzione
-Una volta verificata la nuova regola, copia il file **[src/rewriter.js](/src/rewriter.js)** aggiornato nella CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
+Una volta eseguito il comando `npm run dist`, copia il file **[dist/rewriter.js](/dist/rewriter.js)** all'interno della CloudFront Function, in modo che l’ambiente di produzione utilizzi la versione testata.
