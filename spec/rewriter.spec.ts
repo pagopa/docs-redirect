@@ -1,6 +1,5 @@
 import handler = require("../src/rewriter");
 
-// ora i tipi si recuperano così:
 type RedirectResponse = handler.RedirectResponse;
 type CloudFrontRequest = handler.CloudFrontRequest;
 
