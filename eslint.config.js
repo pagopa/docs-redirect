@@ -20,17 +20,8 @@ module.exports = [
     rules: {
       "no-unused-vars": "off",
       "no-undef": "off",
-      "@typescript-eslint/no-unused-vars": ["warn"],
       "@typescript-eslint/consistent-type-imports": "warn",
-      "no-redeclare": "off",
-      "@typescript-eslint/no-redeclare": [
-        "error",
-        { ignoreDeclarationMerge: true }
-    ],
-    "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { varsIgnorePattern: "^simpleHelper$" }
-    ]
+      "no-redeclare": "off"
     }
   },
 
