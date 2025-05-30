@@ -67,6 +67,12 @@ describe('SEND rules', () => {
         expect(handler(buildRequest("/f.a.q.-per-integratori/v2.4-1"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.4"));
         expect(handler(buildRequest("/f.a.q.-per-integratori/v2.5"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/knowledge-base/v2.5"));
     });
+    
+    it('Should not intercept root resource', () => {
+        expect((handler(buildRequest("/manuale-operativo-unmapped")) as CloudFrontRequest).uri).toBe( "/manuale-operativo-unmapped");
+        expect((handler(buildRequest("/manuale-operativo-pn-2")) as CloudFrontRequest).uri).toBe( "/manuale-operativo-pn-2");
+        expect((handler(buildRequest("/manuale-operativo-pn-2/anything")) as CloudFrontRequest).uri).toBe( "/manuale-operativo-pn-2/anything");
+    })
 });
 
 describe('pagoPA rules', () => {

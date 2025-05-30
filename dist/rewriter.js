@@ -10,22 +10,30 @@ var escapeRegexString = function (input) {
 };
 var createSimpleRegex = function (basePath, capturePath) {
     if (capturePath === void 0) { capturePath = true; }
-    var pattern = escapeRegexString(basePath) + (capturePath ? "(.*)" : "");
-    var regex = new RegExp("^".concat(pattern));
+    var escapedBase = escapeRegexString(basePath);
+    var pattern = [
+        "^(?:".concat(escapedBase, "$)|"),
+        "(?:".concat(escapedBase),
+        capturePath ? "(\\/.*)" : "(?:\\/.*)",
+        "$)"
+    ].join("");
+    var regex = new RegExp(pattern);
     regex._helper = "simple";
+    console.log(pattern);
     return regex;
 };
 var createVersionedRegex = function (basePath, versionPrefix) {
     var escapedBase = escapeRegexString(basePath);
     var escapedPrefix = versionPrefix ? escapeRegexString(versionPrefix) : "";
     var pattern = [
-        "^".concat(escapedBase),
-        "(\\/)?",
+        "^(?:".concat(escapedBase, "$)|"),
+        "(?:".concat(escapedBase),
+        "(\\/)",
         versionPrefix ? "(?:".concat(escapedPrefix, ")?") : "",
         "v?(\\d+(?:\\.\\d+)*)?",
         "(?:\\-\\d+)?",
         "(.*)",
-        "$"
+        "$)"
     ].join("");
     var regex = new RegExp(pattern);
     regex._helper = "versioned";

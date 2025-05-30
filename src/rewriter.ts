@@ -45,8 +45,15 @@ const escapeRegexString = (input: string): string =>
   input.replace(/[.]/g, "\\$&");
 
 const createSimpleRegex = (basePath: string, capturePath = true): HelperRegExp => {
-  const pattern = escapeRegexString(basePath) + (capturePath ? "(.*)" : "");
-  const regex = new RegExp(`^${pattern}`) as HelperRegExp;
+  const escapedBase = escapeRegexString(basePath);
+  const pattern = [
+    `^(?:${escapedBase}$)|`,
+    `(?:${escapedBase}`,
+    capturePath ? "(\\/.*)" : "(?:\\/.*)",
+    "$)"
+  ].join("");
+
+  const regex = new RegExp(pattern) as HelperRegExp;
   regex._helper = "simple";
   return regex;
 };
@@ -55,13 +62,14 @@ const createVersionedRegex = ( basePath: string, versionPrefix?: string): Helper
   const escapedBase = escapeRegexString(basePath);
   const escapedPrefix = versionPrefix ? escapeRegexString(versionPrefix) : "";  
   const pattern = [
-    `^${escapedBase}`,
-    "(\\/)?" ,
+    `^(?:${escapedBase}$)|`,
+    `(?:${escapedBase}`,
+    "(\\/)" ,
     versionPrefix ? `(?:${escapedPrefix})?` : "",
     "v?(\\d+(?:\\.\\d+)*)?",
     "(?:\\-\\d+)?",
     "(.*)",
-    "$"
+    "$)"
   ].join("");
 
   const regex = new RegExp(pattern) as HelperRegExp;
