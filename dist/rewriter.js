@@ -11,7 +11,7 @@ var escapeRegexString = function (input) {
 var createSimpleRegex = function (basePath, capturePath) {
     if (capturePath === void 0) { capturePath = true; }
     var pattern = escapeRegexString(basePath) + (capturePath ? "(.*)" : "");
-    var regex = new RegExp("^".concat(pattern, "$"));
+    var regex = new RegExp("^".concat(pattern));
     regex._helper = "simple";
     return regex;
 };
@@ -73,6 +73,10 @@ var REDIRECT_PATTERNS = [
         regex: createVersionedRegex("/sanp", "sanp-"),
         redirectTo: "/pago-pa/guides/sanp",
         redirectVersionPrefix: ""
+    },
+    {
+        regex: createSimpleRegex("/manuale-operativo-pn", false),
+        redirectTo: "/send/guides/manuale-operativo"
     },
     {
         regex: createVersionedRegex("/manuale-operativo"),

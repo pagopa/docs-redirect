@@ -46,6 +46,8 @@ describe('Firma con IO rules', () => {
 
 describe('SEND rules', () => {
     it('Should intercept SEND\'s manuale-operativo resources that must be redirected', () => {
+        expect(handler(buildRequest("/manuale-operativo-pn"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo"));
+        expect(handler(buildRequest("/manuale-operativo-pn/anything"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo"));
         expect(handler(buildRequest("/manuale-operativo"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo"));
         expect(handler(buildRequest("/manuale-operativo/piattaforma-notifiche-digitali-manuale-operativo/glossario"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/piattaforma-notifiche-digitali-manuale-operativo/glossario"));
         expect(handler(buildRequest("/manuale-operativo/v1.0"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/manuale-operativo/v1.0"));
