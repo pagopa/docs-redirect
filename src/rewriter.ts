@@ -46,7 +46,7 @@ const escapeRegexString = (input: string): string =>
 
 const createSimpleRegex = (basePath: string, capturePath = true): HelperRegExp => {
   const pattern = escapeRegexString(basePath) + (capturePath ? "(.*)" : "");
-  const regex = new RegExp(`^${pattern}$`) as HelperRegExp;
+  const regex = new RegExp(`^${pattern}`) as HelperRegExp;
   regex._helper = "simple";
   return regex;
 };
@@ -111,6 +111,10 @@ const REDIRECT_PATTERNS: readonly RedirectPattern[] = [
     regex: createVersionedRegex("/sanp", "sanp-"),
     redirectTo: "/pago-pa/guides/sanp",
     redirectVersionPrefix: ""
+  },
+  {
+    regex: createSimpleRegex("/manuale-operativo-pn", false),
+    redirectTo: "/send/guides/manuale-operativo"
   },
   {
     regex: createVersionedRegex("/manuale-operativo"),
