@@ -123,6 +123,10 @@ const REDIRECT_PATTERNS: readonly RedirectPattern[] = [
   {
     regex: createVersionedRegex("/f.a.q.-per-integratori"),
     redirectTo: "/send/guides/knowledge-base"
+  },
+  {
+    regex: createSimpleRegex("/interoperabilita-1", false),
+    redirectTo: "/pdnd-interoperabilita/guides/manuale-operativo-pdnd-interoperabilita"
   }
 ] as const;
 

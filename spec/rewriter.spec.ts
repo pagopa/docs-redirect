@@ -129,6 +129,11 @@ describe('IO rules', () => {
         expect(handler(buildRequest("/io-guida-tecnica/io-guida-tecnica-1.3"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v1.3"));
         expect(handler(buildRequest("/io-guida-tecnica/guida-tecnica-1.2"))).toEqual(buildResponse( "https://developer.pagopa.it/app-io/guides/io-guida-tecnica/v1.2"));
     });
-
 });
 
+describe('PDND rules', () => {
+    it('Should intercept interoperabilita-1 resources that must be redirected', () => {
+        expect(handler(buildRequest("/interoperabilita-1"))).toEqual(buildResponse( "https://developer.pagopa.it/pdnd-interoperabilita/guides/manuale-operativo-pdnd-interoperabilita"));
+        expect(handler(buildRequest("/interoperabilita-1/normativa-e-approfondimenti"))).toEqual(buildResponse( "https://developer.pagopa.it/pdnd-interoperabilita/guides/manuale-operativo-pdnd-interoperabilita"));
+    })
+});
