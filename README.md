@@ -6,7 +6,7 @@ Il codice è scritto per essere eseguito come [CloudFront Function](https://docs
 
 ## Teoria delle operazioni
 
-- La URI in ingresso viene testata sulle regex elencate nell'array `regexPatterns` con flag `active` valorizzato a _true_. 
+- La URI in ingresso viene testata sulle regex elencate nell'array `regexPatterns`. 
 
 - Al primo match, viene restituito il redirect (301) alla URL ottenuta combinando la proprietà `redirectTo` ed eventuali informazioni presenti nell'URI originale ed estratte dalla regex stessa.
 
