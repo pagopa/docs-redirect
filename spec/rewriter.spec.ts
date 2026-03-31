@@ -137,3 +137,11 @@ describe('PDND rules', () => {
         expect(handler(buildRequest("/interoperabilita-1/normativa-e-approfondimenti"))).toEqual(buildResponse( "https://developer.pagopa.it/pdnd-interoperabilita/guides/manuale-operativo-pdnd-interoperabilita"));
     })
 });
+
+describe('Portale Fatturazione rules', () => {
+    it('Should intercept Portale Fatturazione resources that must be redirected', () => {
+        expect(handler(buildRequest("/allegati-pf-send/manuale-utente-portale-fatturazione/any-path/leaf.pdf"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/allegati-pf-send"));
+        expect(handler(buildRequest("/allegati-pf-send/manuale-utente-portale-fatturazione"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/allegati-pf-send"));
+        expect(handler(buildRequest("/allegati-pf-send/allegato-tecnico-portale-fatturazione"))).toEqual(buildResponse( "https://developer.pagopa.it/send/guides/allegati-pf-send"));
+    })
+});
