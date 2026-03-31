@@ -127,6 +127,10 @@ const REDIRECT_PATTERNS: readonly RedirectPattern[] = [
   {
     regex: createSimpleRegex("/interoperabilita-1", false),
     redirectTo: "/pdnd-interoperabilita/guides/manuale-operativo-pdnd-interoperabilita"
+  },
+  {
+    regex: createSimpleRegex("/allegati-pf-send", false),
+    redirectTo: "/send/guides/allegati-pf-send"
   }
 ] as const;
 
